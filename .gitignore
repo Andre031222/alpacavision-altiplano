@@ -1,0 +1,89 @@
+# ---------------------------------------------------------------------------
+# AlpacaVision AI — .gitignore
+# Public repo = code + configs + paper sources + metrics JSON.
+# Heavy artefacts (data, models, venvs) live on Zenodo / GitHub Releases.
+# ---------------------------------------------------------------------------
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments (Windows venv/ and Linux .venv-linux/)
+venv/
+env/
+.conda/
+.venv/
+.venv-linux/
+
+# Secrets — never commit
+.env
+*.key
+kaggle.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tooling cache
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Data — all of it is heavy; goes to Zenodo (CC BY 4.0), never to git
+data/
+
+# Trained models & exports — go to GitHub Releases / Hugging Face
+models/**/*.pt
+models/**/*.onnx
+models/**/*.tflite
+models/pretrained/
+
+# Outputs — ignore heavy run data, KEEP figures + metrics JSON for the paper
+outputs/training_runs/
+outputs/predictions/
+outputs/reports/
+outputs/figures/stage1_test_eval/
+!outputs/figures/
+
+# Ultralytics run dirs & logs
+runs/
+logs/
+*.log
+
+# Root-level stray weights / archives
+/*.pt
+/*.onnx
+*.zip
+*.tar.gz
+
+# Paper — keep sources (.tex/.bib/.cls/.bst/.sty + logos + figures), drop build files
+paper/manuscript/manuscript.pdf
+paper/cover_letter/*.pdf
+paper/manuscript/*.aux
+paper/manuscript/*.bbl
+paper/manuscript/*.blg
+paper/manuscript/*.out
+paper/manuscript/*.log
+paper/manuscript/*.toc
+paper/manuscript/*.spl
+paper/**/*-eps-converted-to.pdf
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local office drafts (Anexos etc.) — not part of the code repo
+/*.docx
+/*.png
+
+# Legacy / archived (superseded files kept locally, not published)
+**/legacy/
+INICIAR.bat
+_local/

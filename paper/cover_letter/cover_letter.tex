@@ -1,0 +1,121 @@
+%% AlpacaVision AI — Cover Letter for MDPI Animals
+%% Corresponding author: Leonid Aleman-Gonzales (advisor)
+%% Portal: susy.mdpi.com
+
+\documentclass[12pt, letterpaper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{microtype}
+
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+
+\begin{document}
+
+\begin{flushright}
+  Leonid Alem\'an-Gonzales (Corresponding Author)\\
+  Escuela Profesional de Ingenier\'ia Estad\'istica e Inform\'atica\\
+  Universidad Nacional del Altiplano (UNAP)\\
+  Puno, Per\'u\\
+  \href{mailto:laleman@unap.edu.pe}{laleman@unap.edu.pe}\\[6pt]
+  \today
+\end{flushright}
+
+\bigskip
+
+The Editor-in-Chief\\
+\textit{Animals}\\
+MDPI AG, Basel, Switzerland\\
+\href{https://www.mdpi.com/journal/animals}{https://www.mdpi.com/journal/animals}
+
+\bigskip
+
+Dear Editor,
+
+We are pleased to submit our manuscript entitled:
+
+\begin{center}
+\textbf{Automatic Detection of Morphological Anomalies in Altiplano Alpacas \\
+Using a Computer Vision System: A Curated Dataset, Compact Detector, and \\
+Ocular Anomaly Classification Feasibility Study}
+\end{center}
+
+for consideration for publication in \textit{Animals}.
+
+\textbf{Scientific contribution.}
+Peru holds 87\% of the world's alpaca (\textit{Vicugna pacos}) population, yet no
+publicly available computer-vision dataset or automated diagnostic system exists for
+this economically vital species. This paper presents AlpacaVision AI, comprising a
+curated open dataset, a compact and deployable body detector, a data-integrity
+methodology, and a rigorous, honest feasibility study of automatic ocular anomaly
+classification. Our compact YOLOv11n detector reaches mAP@0.5 = 0.860 on a
+leakage-free 308-image held-out test set; a larger YOLOv11s reaches only 0.863,
+confirming the compact model captures essentially all available signal.
+
+\textbf{Key contributions.}
+\begin{enumerate}
+  \item \textbf{Open, curated dataset:} 2,051 unique labelled alpaca images (YOLO
+        format), consolidated from nine public sources after removing 1,037 exact
+        MD5 duplicates, with CLAHE preprocessing for Andean high-UV conditions,
+        released under CC~BY~4.0.
+  \item \textbf{Compact detector:} YOLOv11n (2.58M parameters) achieving
+        mAP@0.5 = 0.860 (Precision = 0.913, Recall = 0.731) on a strictly
+        leakage-free held-out test set, with ONNX export for field deployment.
+  \item \textbf{Data-integrity methodology:} MD5 deduplication, group-aware
+        train/validation/test splitting, and label-conflict resolution, developed
+        after an audit revealed systematic data leakage that had inflated all
+        initially reported metrics --- a transparent, reproducible protocol we
+        release with the code.
+  \item \textbf{Honest feasibility study (negative result):} under a leakage-free
+        protocol the EfficientNet-B2 ocular classifier performs at chance
+        (AUC-ROC = 0.506, 95\% CI [0.368, 0.645]). Because the identical pipeline
+        reaches F1 = 0.957 on real human-fundus data, we attribute the failure to
+        the absence of expert veterinary labels rather than to the model, and
+        conclude that vision-language auto-labelling alone is insufficient for
+        fine-grained camelid ocular pathology.
+  \item \textbf{Deployed system:} an end-to-end Flask web application with role-based
+        access and automated Spanish-language veterinary report generation.
+\end{enumerate}
+
+\textbf{Why this matters.}
+Beyond the first open alpaca detection benchmark, the manuscript directly addresses
+\textit{Animals}' core themes of animal health, welfare, and the practical management of
+livestock: it provides a deployable tool to support early, objective detection of
+morphological anomalies in a species whose remote high-altitude husbandry offers minimal
+access to veterinary care, and it discusses concrete pathways to integration in field
+health campaigns and herd-welfare monitoring. Its candid treatment of data leakage and its
+well-documented negative result are of additional broad value, setting realistic
+expectations for practitioners tempted to bootstrap medical-grade classifiers from
+large-language-model annotations and offering a reusable methodology for leakage-free
+evaluation in veterinary auto-labelling pipelines. The work thus sits squarely within the
+scope of \textit{Animals} at the intersection of precision livestock farming, animal
+welfare, and AI-assisted veterinary diagnostics, with strong applied relevance for
+indigenous Andean herding communities.
+
+\textbf{Originality statement.}
+This manuscript has not been published and is not under consideration elsewhere.
+The dataset and code are openly released (CC~BY~4.0 and MIT, respectively).
+All co-authors have approved the final manuscript and declare no competing interests.
+The article-processing charge is supported by the Universidad Nacional del Altiplano
+(UNAP), Puno, Peru.
+
+\textbf{Suggested reviewers.}
+We suggest reviewers with expertise in:
+(1)~computer vision applied to livestock health and behaviour monitoring;
+(2)~transfer learning and convolutional neural networks for animal disease detection;
+(3)~precision livestock farming technology and its adoption in developing-country contexts.
+
+We thank you for considering this submission and look forward to your response.
+
+Sincerely,
+
+\vspace{1.5cm}
+
+Leonid Alem\'an-Gonzales (Advisor / Corresponding Author)\\[4pt]
+Richar Andre Vilca-Solorzano\\
+Dina Maribel Yana-Yucra\\
+Cristian Daniel Ccora-Acero\\[6pt]
+Semillero de Investigaci\'on ``John J. Hopfield -- IIICCD''\\
+Universidad Nacional del Altiplano (UNAP), Puno, Per\'u
+
+\end{document}
