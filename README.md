@@ -1,4 +1,4 @@
-# Automatic Detection of Morphological Anomalies in Altiplano Alpacas Using Computer Vision
+# Automatic Computer-Vision Detection of Morphological Anomalies in Altiplano Alpacas
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21134001.svg)](https://doi.org/10.5281/zenodo.21134001)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -15,9 +15,8 @@ YOLOv11 body detector**, a **data-integrity methodology** for auto-labelling pip
 an **honest feasibility study** of automatic ocular anomaly classification.
 
 > **Companion code for the manuscript:**
-> *Automatic Detection of Morphological Anomalies in Altiplano Alpacas Using a Computer
-> Vision System: A Curated Dataset, Compact Detector, and Ocular Anomaly Classification
-> Feasibility Study.*
+> *Automatic Computer-Vision Detection of Morphological Anomalies in Altiplano Alpacas:
+> A Curated Dataset, Compact Detector, and Ocular Classification Feasibility Study.*
 > In preparation for *Animals* (MDPI), Q1 Veterinary Sciences.
 
 ---
@@ -246,9 +245,9 @@ If you use this dataset or code, please cite (details to be updated on acceptanc
 
 ```bibtex
 @article{vilcasolorzano2026alpacavision,
-  title   = {Automatic Detection of Morphological Anomalies in Altiplano Alpacas Using a
-             Computer Vision System: A Curated Dataset, Compact Detector, and Ocular
-             Anomaly Classification Feasibility Study},
+  title   = {Automatic Computer-Vision Detection of Morphological Anomalies in Altiplano
+             Alpacas: A Curated Dataset, Compact Detector, and Ocular Classification
+             Feasibility Study},
   author  = {Vilca-Solorzano, Richar Andre and Yana-Yucra, Dina Maribel and
              Ccopa-Acero, Cristian Daniel and Alem\'an-Gonzales, Leonid},
   journal = {Animals (MDPI)},

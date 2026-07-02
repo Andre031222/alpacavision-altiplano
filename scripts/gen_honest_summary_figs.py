@@ -178,8 +178,6 @@ def fig11_dataset_stats():
                  fontweight="bold", fontsize=9.5)
     ax.spines[["top", "right"]].set_visible(False)
 
-    fig.suptitle("Figure 11. Honest Dataset Composition (post leakage audit)",
-                 fontsize=11, fontweight="bold", y=1.03)
     plt.tight_layout(pad=1.0)
     _save(fig, "fig11_dataset_stats")
 
