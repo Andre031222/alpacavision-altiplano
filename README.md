@@ -99,7 +99,7 @@ flowchart LR
     B -->|"bounding box"| C["Anatomical<br/>crop extraction"]
     C --> D["Stage 2<br/>EfficientNet-B2<br/>ocular classifier<br/>(feasibility only)"]
     B --> E["Flask web app<br/>+ ONNX runtime"]
-    E --> F["Automated Spanish<br/>veterinary report (LLM)"]
+    E --> F["Automated Spanish<br/>veterinary report (VLM)"]
     D -. "chance-level — not deployed" .-> E
 ```
 
@@ -229,7 +229,7 @@ This project deliberately reports what does **not** work as well as what does:
 
 - **The detector works** and is deployable; the **ocular classifier does not** — it is at
   chance under a leakage-free protocol and is reported as a feasibility study, not a product.
-- The failure is caused by (i) **LLM-vision auto-labels** without veterinary validation and
+- The failure is caused by (i) **vision-language auto-labels** without veterinary validation and
   (ii) a **physical resolution ceiling** (source images ≈ 375 px; eye crops ≈ 31 px).
 - A working ocular classifier will require **expert veterinary ground truth** on
   **purpose-acquired, close-up** ocular imagery (eye region ≳ 128 px) — see
