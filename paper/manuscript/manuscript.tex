@@ -253,7 +253,10 @@ distal limbs (legs).
 Crops were extracted by applying fixed-ratio padding (20\%) around each bounding box
 at the class-2 (head region) annotations from the Roboflow sources.
 Ocular-anomaly labels were generated using zero-shot visual language model inference
-(Groq \texttt{meta-llama/llama-4-scout-17b-16e-instruct}; open-set detection assisted by
+(Groq \texttt{meta-llama/llama-4-scout-17b-16e-instruct}, a Groq-hosted multimodal
+(vision-language) model;\footnote{Model card:
+\url{https://console.groq.com/docs/model/meta-llama/llama-4-scout-17b-16e-instruct}.}
+open-set detection assisted by
 Grounding DINO~\cite{liu2023grounding}), \emph{without} veterinary expert validation ---
 a design choice whose limitations are central to the feasibility study reported below.
 The same data-integrity audit that affected the detector revealed two further problems in
@@ -263,6 +266,11 @@ with augmentations of the same image leaking across train/test; and (ii)~75 of 9
 labelled ``anomaly'' were the \emph{same file} as a ``normal'' image, i.e. direct
 label conflicts. After deduplication and conflict resolution, Table~\ref{tab:crops}
 reports the honest unique-image inventory.
+For the classifier, the 462 usable eye crops (371 normal / 91 anomaly) were partitioned
+with the same 70\%/15\%/15\% train/validation/test scheme as the detector, using a
+group-aware split that keeps every augmentation of a source image on a single side and
+draws the validation and test folds only from unaugmented originals; the frozen test set
+therefore comprises 70 unique images ($\approx$15\% of 462: 56 normal / 14 anomaly).
 Leg crops yielded 443 normal samples and 3 anomalous samples --- insufficient for
 training a classifier; leg anomaly detection is therefore reserved for future work.
 A post-hoc analysis (Section~\ref{sec:discussion}) further showed that the extracted eye
