@@ -181,12 +181,13 @@ This work addresses that gap with five principal contributions:
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{fig11_dataset_stats.pdf}
-  \caption{Dataset composition and augmentation strategy.
-           \textbf{(A)}~Image sources contributing to the curated 2,051-image detector
-           dataset (after MD5 deduplication).
-           \textbf{(B)}~Class distribution of ocular anomaly crops across training and
-           test splits.
-           \textbf{(C)}~Data augmentation strategies applied during classifier training.}
+  \caption{Dataset composition (leakage-free).
+           \textbf{(A)}~MD5 deduplication of the detector corpus: 3,088 raw files, 1,037
+           exact duplicates removed, and 2,051 unique images retained.
+           \textbf{(B)}~Leakage-free detector split of the 2,051 unique images
+           (train 1,435 / validation 308 / test 308).
+           \textbf{(C)}~Real, non-augmented ocular-crop inventory for the classifier
+           feasibility study (371 normal / 91 anomaly), partitioned group-aware.}
   \label{fig:dataset_stats}
 \end{figure}
 
@@ -252,7 +253,7 @@ distal limbs (legs).
 Crops were extracted by applying fixed-ratio padding (20\%) around each bounding box
 at the class-2 (head region) annotations from the Roboflow sources.
 Ocular-anomaly labels were generated using zero-shot visual language model inference
-(Groq \texttt{llama-4-scout-17b-16e-instruct}; open-set detection assisted by
+(Groq \texttt{meta-llama/llama-4-scout-17b-16e-instruct}; open-set detection assisted by
 Grounding DINO~\cite{liu2023grounding}), \emph{without} veterinary expert validation ---
 a design choice whose limitations are central to the feasibility study reported below.
 The same data-integrity audit that affected the detector revealed two further problems in
@@ -381,6 +382,11 @@ modules: (i)~image upload and real-time inference via ONNX Runtime, (ii)~herd
 management (animal registry with longitudinal analysis history), and (iii)~automated
 veterinary report generation in Spanish using the Groq
 \texttt{llama-3.3-70b-versatile} language model~\cite{groq2024}.
+Crucially, in light of the feasibility study (Section~\ref{sec:res:classifier}), the
+production backend deliberately \emph{bypasses} the chance-level EfficientNet-B2 classifier:
+ocular assessment in the deployed application is delegated to the Groq vision-language model,
+while the compact YOLOv11n detector provides the reliable animal-localisation step. No
+model that performs at chance is used for diagnosis in the deployed system.
 The UI supports dark/light theme toggle.
 System configuration is managed through a white-label admin panel without code
 modification.
@@ -625,10 +631,15 @@ data identified as necessary by our feasibility study.
   \item \textbf{Absence of leg anomaly data:}
         Only 3 ground-truth anomalous leg crops were available.
         Leg anomaly classification is deferred to a follow-up study with field data.
-  \item \textbf{Geographic scope:}
+  \item \textbf{Geographic and phenotypic scope:}
         The Roboflow training images are globally sourced; the iNaturalist subset
-        covers Peru but was not restricted to the altiplano biome.
-        Domain adaptation for high-altitude Andean imaging conditions is ongoing.
+        covers Peru but was not restricted to the altiplano biome. Moreover, the corpus
+        may under-represent the marked phenotypic variation among alpaca breeds --- notably
+        the dense, crimped fleece of the \textit{Huacaya} versus the long, lustrous locks of
+        the \textit{Suri} --- and across coat colours; such differences in body outline and
+        surface texture could reduce detector recall under large-scale field deployment.
+        Domain adaptation across breeds, coat types, and high-altitude Andean imaging
+        conditions is ongoing.
   \item \textbf{No prospective clinical validation:}
         The system has not been evaluated prospectively in a real-world herd-visit
         workflow with camelid-specialist veterinary ground truth.
