@@ -77,7 +77,7 @@ YOLOv11s reaches mAP@0.5 = 0.863. These are the leakage-free figures reported in
 
 ## Citation
 
-> Vilca-Solórzano, R.A.; Ccopa-Acero, C.D.; Yana-Yucra, D.M.; Alemán-Gonzales, L.
+> Vilca-Solorzano, R.A.; Ccopa-Acero, C.D.; Yana-Yucra, D.M.; Alemán-Gonzales, L.
 > *AlpacaVision AI: A Curated Dataset and Compact Detector for Altiplano Alpacas.*
 > Universidad Nacional del Altiplano de Puno, 2026. Dataset, CC BY 4.0.
 

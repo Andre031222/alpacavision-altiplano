@@ -268,5 +268,5 @@ Developed by the **Semillero de Investigación "John J. Hopfield — IIICCD"**, 
 Profesional de Ingeniería Estadística e Informática, **Universidad Nacional del Altiplano
 de Puno (UNAP)**, Peru.
 
-**Authors:** Richar Andre Vilca-Solórzano, Dina Maribel Yana-Yucra, Cristian Daniel
+**Authors:** Richar Andre Vilca-Solorzano, Dina Maribel Yana-Yucra, Cristian Daniel
 Ccopa-Acero · **Advisor:** Leonid Alemán-Gonzales (laleman@unap.edu.pe).
