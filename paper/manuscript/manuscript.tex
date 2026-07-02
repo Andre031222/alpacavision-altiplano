@@ -44,6 +44,9 @@
 \usepackage{siunitx}
 \usepackage{subcaption}
 
+%% Uniform, slightly airier table row spacing (consistent across all tables)
+\renewcommand{\arraystretch}{1.18}
+
 \graphicspath{{../figures/}}
 
 %% ---- Journal info -------------------------------------------------------
@@ -189,15 +192,12 @@ This work addresses that gap with five principal contributions:
 
 \subsubsection{Source Aggregation}
 
-We consolidated alpaca images from nine Roboflow Universe projects
-(\texttt{alpaca-5jmfl}, \texttt{alpaca-8baig}, \texttt{alpaca-epqna},
-\texttt{alpaca-gkbmi}, \texttt{alpaca-ibscl}, \texttt{alpaca-lls3s},
-\texttt{alpaca-nrzos}, \texttt{alpaca-ofxv9}, \texttt{alpaca-xqfiw}),
-all providing YOLO-format bounding-box annotations for the single class
-\texttt{alpaca}.
-One additional project (\texttt{alpaca-zehtv}) was excluded after quality
-screening (mean bounding-box area ratio $< 0.01$, indicating non-informative
-annotations).
+We consolidated alpaca images from nine public Roboflow Universe alpaca-detection
+projects, all providing YOLO-format bounding-box annotations for the single class
+\texttt{alpaca}. The exact project identifiers and the per-image source are listed in the
+released dataset record and accompanying data card (DOI:~10.5281/zenodo.21134001), so the
+provenance is fully reproducible. One further candidate project was excluded after quality
+screening (mean bounding-box area ratio $< 0.01$, indicating non-informative annotations).
 Supplementary unlabelled images were downloaded from iNaturalist (taxon 319688,
 \textit{Vicugna pacos}, Peruvian observations) via the iNaturalist API.
 
