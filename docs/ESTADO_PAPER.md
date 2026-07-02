@@ -17,7 +17,7 @@
 Pre-cribado del lote `batch_01` (462 crops) reveló que los recortes de ojo son **demasiado pequeños** para diagnosticar: **mediana del lado menor ≈31 px** (verificado midiendo los 462 crops), **<8% con lado ≥100 px**, 73% <50 px. Es un techo físico del recorte, independiente del modelo o del etiquetador — **ni un veterinario sacaría anomalías de estas miniaturas**. Añadido al manuscrito como limitación citable (Limitaciones + Discusión + Future Work). El auto-etiquetado Groq marcó 91 "anomaly"; un cribado VLM cuidadoso confirma 1 (acuerdo inter-VLM 60.7%, casi azar) — evidencia extra de la tesis. **Acción correcta = aguas arriba:** re-extraer crops a mayor resolución (lado ≥~128 px) desde `data/raw` ANTES de mandar a un veterinario. Reporte: `docs/PRECRIBADO_IA_batch01.md`. El lote `00_POR_REVISAR/` quedó intacto.
 
 ### ⚠️ Para que decida el equipo (no lo resolví yo)
-- **Discrepancia de autores:** el manuscrito lista a Vilca-Solorzano R.A., Ccora-Acero C.D., Yana-Yucra D.M., Alemán-Gonzales L. El README viejo listaba otro equipo (Jaguer Ladera, Limachi Quispe, Mares — equipo del póster CONASEIN 2025). Hay que confirmar la autoría definitiva. Dejé el README sin lista de autores (solo asesor) hasta que se confirme.
+- **Discrepancia de autores:** el manuscrito lista a Vilca-Solorzano R.A., Ccopa-Acero C.D., Yana-Yucra D.M., Alemán-Gonzales L. El README viejo listaba otro equipo (Jaguer Ladera, Limachi Quispe, Mares — equipo del póster CONASEIN 2025). Hay que confirmar la autoría definitiva. Dejé el README sin lista de autores (solo asesor) hasta que se confirme.
 - Rotar claves Groq/Roboflow y la contraseña de admin/Postgres que estaban en texto plano en README/ARRANCAR_SESION (ya redactadas).
 
 ---
@@ -170,5 +170,5 @@ pdflatex preview.tex && bibtex preview && pdflatex preview.tex && pdflatex previ
 
 ---
 *AlpacaVision AI · Semillero "John J. Hopfield — IIICCD" · UNA Puno · 2025-2026*
-*Asesor: Aleman Gonzales, Leonid · Equipo: Vilca-Solorzano RA, Ccora-Acero CD, Yana-Yucra DM*
+*Asesor: Aleman Gonzales, Leonid · Equipo: Vilca-Solorzano RA, Ccopa-Acero CD, Yana-Yucra DM*
 *Actualizado: 2026-06-10 — Windows (Claude Code)*

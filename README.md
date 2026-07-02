@@ -1,5 +1,6 @@
 # Automatic Detection of Morphological Anomalies in Altiplano Alpacas Using Computer Vision
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21134001.svg)](https://doi.org/10.5281/zenodo.21134001)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset: CC BY 4.0](https://img.shields.io/badge/dataset-CC%20BY%204.0-blue.svg)](#data)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
@@ -24,6 +25,7 @@ an **honest feasibility study** of automatic ocular anomaly classification.
 ## Table of contents
 - [Overview](#overview)
 - [Key results](#key-results)
+- [How it works](#how-it-works)
 - [Repository structure](#repository-structure)
 - [Data](#data)
 - [Installation](#installation)
@@ -88,6 +90,72 @@ test, *n* = 70: 14 anomaly / 56 normal):
 
 ---
 
+## How it works
+
+### System pipeline
+
+```mermaid
+flowchart LR
+    A["Field photograph<br/>of an alpaca"] --> B["Stage 1<br/>YOLOv11n detector"]
+    B -->|"bounding box"| C["Anatomical<br/>crop extraction"]
+    C --> D["Stage 2<br/>EfficientNet-B2<br/>ocular classifier<br/>(feasibility only)"]
+    B --> E["Flask web app<br/>+ ONNX runtime"]
+    E --> F["Automated Spanish<br/>veterinary report (LLM)"]
+    D -. "chance-level — not deployed" .-> E
+```
+
+The deployed system localises the animal with the detector; the ocular classifier is
+reported as a **feasibility study and is not used for diagnosis** (see
+[Honest scope](#honest-scope-and-limitations)).
+
+### Stage 1 — YOLOv11n body detector (convolutional object detection)
+
+YOLOv11n is a **single-stage, anchor-free convolutional object detector**. Each image is
+passed once through three convolutional components:
+
+1. **Backbone** — stacked convolutional blocks (CSP-style C3k2 modules) that progressively
+   downsample the image into hierarchical **feature maps**, learning edges → textures →
+   alpaca-shaped patterns.
+2. **Neck** — a feature-pyramid / path-aggregation network that fuses features across scales
+   so both near and distant alpacas are detected.
+3. **Head** — predicts, per grid location, the **bounding-box** coordinates and an
+   objectness/confidence score for the single class `alpaca`.
+
+The model is deliberately compact (**2.58 M parameters, 6.3 GFLOPs, 5.3 MB**), trained for
+80 epochs (AdamW, lr₀ = 0.001, batch 8, 640×640, early stopping on val mAP@0.5) and exported
+to **ONNX** for real-time field inference.
+
+### Data-integrity methodology (why the metrics are trustworthy)
+
+```mermaid
+flowchart TD
+    R["3,088 raw image files<br/>(9 public sources)"] --> M["MD5 hashing"]
+    M -->|"1,037 exact duplicates removed"| U["2,051 unique images"]
+    U --> G["Group-aware split<br/>(augmentations of the same image<br/>never cross partitions)"]
+    G --> T["Train 1,435 · Val 308 · Test 308<br/>leakage-free"]
+```
+
+An audit revealed that exact-duplicate images and augmentation leakage had inflated the
+first metrics we obtained. We deduplicate by MD5 hash, split at the level of **unique source
+images**, and resolve label conflicts — so every number reported is leakage-free.
+
+### Stage 2 — EfficientNet-B2 ocular classifier (two-stage transfer learning)
+
+EfficientNet-B2 is a convolutional classifier built from **MBConv blocks with
+squeeze-and-excitation**, sized by **compound scaling** (depth, width and input resolution
+grown together, ~9 M parameters) for a strong accuracy-to-size trade-off.
+
+```mermaid
+flowchart LR
+    I["ImageNet<br/>pre-training"] --> S1["Stage 1<br/>Human fundus images<br/>val F1 = 0.957 ✓"]
+    S1 --> S2["Stage 2<br/>Alpaca eye crops<br/>AUC-ROC = 0.506 ✗ (chance)"]
+```
+
+The identical pipeline reaches F1 = 0.957 on real, expertly labelled human-fundus data but
+collapses to chance on the alpaca stage. The failure is therefore attributed to the
+**auto-generated labels and the low crop resolution** (median smaller side ≈ 31 px), not to
+the model — this is the paper's honest negative result.
+
 ## Repository structure
 
 ```
@@ -110,7 +178,7 @@ data/          (git-ignored; deposited to Zenodo) annotated_clean/ = curated dat
 The curated dataset (**2,051 unique images**, YOLO format, train/val/test = 1,435 / 308 /
 308) is released under **CC BY 4.0** and deposited on Zenodo.
 
-- **Zenodo DOI:** *to be released* (see `docs/DATASET_CARD.md` for full provenance,
+- **Zenodo DOI:** [10.5281/zenodo.21134001](https://doi.org/10.5281/zenodo.21134001) (see `docs/DATASET_CARD.md` for full provenance,
   preprocessing, and licensing).
 - Sources: nine Roboflow Universe projects (single class `alpaca`); supplementary
   unlabelled imagery from iNaturalist (taxon 319688, Peru).
@@ -182,7 +250,7 @@ If you use this dataset or code, please cite (details to be updated on acceptanc
              Computer Vision System: A Curated Dataset, Compact Detector, and Ocular
              Anomaly Classification Feasibility Study},
   author  = {Vilca-Solorzano, Richar Andre and Yana-Yucra, Dina Maribel and
-             Ccora-Acero, Cristian Daniel and Alem\'an-Gonzales, Leonid},
+             Ccopa-Acero, Cristian Daniel and Alem\'an-Gonzales, Leonid},
   journal = {Animals (MDPI)},
   year    = {2026},
   note    = {In preparation}
@@ -201,4 +269,4 @@ Profesional de Ingeniería Estadística e Informática, **Universidad Nacional d
 de Puno (UNAP)**, Peru.
 
 **Authors:** Richar Andre Vilca-Solórzano, Dina Maribel Yana-Yucra, Cristian Daniel
-Ccora-Acero · **Advisor:** Leonid Alemán-Gonzales (laleman@unap.edu.pe).
+Ccopa-Acero · **Advisor:** Leonid Alemán-Gonzales (laleman@unap.edu.pe).

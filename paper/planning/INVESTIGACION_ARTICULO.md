@@ -308,4 +308,4 @@ FASE 6 — Despliegue
 ---
 
 *AlpacaVision AI · Semillero "John J. Hopfield — IIICCD" · UNA Puno · 2025-2026*
-*Asesor: Alemán Gonzales, Leonid · Equipo: Vilca Solorzano RA, Ccora Acero CD, Yana Yucra DM*
+*Asesor: Alemán Gonzales, Leonid · Equipo: Vilca Solorzano RA, Ccopa Acero CD, Yana Yucra DM*
