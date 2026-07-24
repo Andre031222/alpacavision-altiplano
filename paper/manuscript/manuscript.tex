@@ -54,43 +54,44 @@
 Alpacas: A Curated Dataset, Compact Detector, and Ocular Classification
 Feasibility Study}
 
-\Author{Richar Andre Vilca-Solorzano$^{1}$,
-        Dina Maribel Yana-Yucra$^{1}$,
-        Cristian Daniel Ccopa-Acero$^{1}$
-        and Leonid Alem\'an-Gonzales$^{1,*}$}
+%% ORCID: real, confirmed iDs for all four authors.
+\Author{Richar Andre Vilca-Solorzano$^{1,*}$\,\href{https://orcid.org/0009-0003-2385-5263}{\orcidicon},
+        Dina Maribel Yana-Yucra$^{1}$\,\href{https://orcid.org/0009-0003-6218-2735}{\orcidicon},
+        Cristian Daniel Ccopa-Acero$^{1}$\,\href{https://orcid.org/0009-0005-7176-5849}{\orcidicon}
+        and Leonid Alem\'an-Gonzales$^{1,*}$\,\href{https://orcid.org/0000-0002-4072-6370}{\orcidicon}}
 
 \AuthorNames{Vilca-Solorzano, R.A.; Yana-Yucra, D.M.; Ccopa-Acero, C.D.; Alem\'an-Gonzales, L.}
 
 \address{$^{1}$~Semillero de Investigaci\'on ``John J.\ Hopfield -- IIICCD'',
          Escuela Profesional de Ingenier\'ia Estad\'istica e Inform\'atica,
          Universidad Nacional del Altiplano (UNAP), Puno 21001, Per\'u;
-         andrevilcasolorzano@gmail.com (R.A.V.-S.);
+         75521963@est.unap.edu.pe (R.A.V.-S.);
          maribelbel201314@gmail.com (D.M.Y.-Y.);
          danielccopa76@gmail.com (C.D.C.-A.);
          laleman@unap.edu.pe (L.A.-G.)}
 
-\corres{Correspondence: laleman@unap.edu.pe}
+\corres{Correspondence: 75521963@est.unap.edu.pe (R.A.V.-S.);
+        laleman@unap.edu.pe (L.A.-G.)}
 
 \abstract{%
 The Peruvian Altiplano holds 87\% of the world's alpacas (\textit{Vicugna pacos}), yet
-detection of morphological anomalies relies on subjective visual inspection by
-veterinarians who are scarce in remote Andean communities, and no public computer-vision
-dataset or automated system exists for the species. We present \textbf{AlpacaVision AI},
-comprising: (i)~the first open, curated and deduplicated dataset of 2,051 unique labelled
-alpaca images from nine public sources (1,037 MD5 duplicates removed), CLAHE-preprocessed
-for high-UV Andean conditions; (ii)~a compact YOLOv11n body detector reaching
-mAP@0.5~=~0.860 (P~=~0.913, R~=~0.731) on a leakage-free 308-image test set; (iii)~a
-feasibility study showing that vision-language auto-labelling of ocular anomalies is
-insufficient for fine-grained classification --- under a leakage-free protocol an
-EfficientNet-B2 classifier attains AUC-ROC~=~0.506 (95\%~CI~[0.366, 0.645]),
-indistinguishable from chance --- which we trace to unreliable labels and a physical
-resolution ceiling, indicating that expert veterinary ground truth and close-up imagery
-are required; (iv)~a data-integrity methodology
-(MD5 deduplication, group-aware splitting, and label-conflict resolution) that detected
-and corrected systematic leakage inflating earlier metrics; and (v)~a deployed web
-application with automated Spanish veterinary reporting and ONNX export. The dataset
-(CC~BY~4.0) and code (MIT) are released to support reproducible precision-livestock-farming
-research and improved animal welfare and health management in high-Andean alpaca communities.
+detection of morphological anomalies relies on subjective visual inspection by scarce
+veterinarians, and no public computer-vision dataset or automated system exists for the
+species. We present \textbf{AlpacaVision AI}, comprising: (i)~the first open, curated and
+deduplicated dataset of 2,051 unique labelled alpaca images from nine public sources
+(1,037 MD5 duplicates removed), CLAHE-preprocessed for high-UV Andean conditions;
+(ii)~a compact YOLOv11n body detector reaching mAP@0.5~=~0.860 (P~=~0.913, R~=~0.731) on a
+leakage-free 308-image test set; (iii)~a feasibility study showing that vision-language
+auto-labelling of ocular anomalies is insufficient for fine-grained classification: under a
+leakage-free protocol an EfficientNet-B2 classifier attains AUC-ROC~=~0.506
+(95\%~CI~[0.366, 0.645]), indistinguishable from chance, which we trace to unreliable
+labels and a physical resolution ceiling requiring expert veterinary ground truth and
+close-up imagery; (iv)~a data-integrity methodology (MD5 deduplication, group-aware
+splitting, and label-conflict resolution) that corrected systematic leakage inflating
+earlier metrics; and (v)~a deployed web application with automated Spanish veterinary
+reporting and ONNX export. The dataset (CC~BY~4.0) and code (MIT) are released to support
+reproducible precision livestock farming and improved welfare in high-Andean alpaca
+communities.
 }
 
 \keyword{alpaca health; animal welfare; precision livestock farming; livestock monitoring;
@@ -226,20 +227,25 @@ The test set (308 images) was held out from all modelling decisions and used sol
 for final evaluation.
 
 \begin{table}[h]
-\caption{AlpacaVision AI dataset composition and leakage-free splits (after MD5
-         deduplication).}
+\caption{AlpacaVision AI detector dataset composition and leakage-free splits (after MD5
+         deduplication of 3,088 raw files to 2,051 unique images).}
 \label{tab:dataset}
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-\textbf{Split} & \textbf{Images} & \textbf{Fraction} & \textbf{Labels} \\
+\textbf{Split} & \textbf{Images} & \textbf{Fraction} & \textbf{Annotation} \\
 \midrule
-Train      & 1435 & 70\% & YOLO \\
-Validation & 308  & 15\% & YOLO \\
-Test       & 308  & 15\% & YOLO \\
+Train      & 1,435 & 70\% & YOLO bbox \\
+Validation & 308   & 15\% & YOLO bbox \\
+Test       & 308   & 15\% & YOLO bbox \\
 \midrule
-\textbf{Total} & \textbf{2051} & 100\% & \\
+\textbf{Total} & \textbf{2,051} & \textbf{100\%} & YOLO bbox \\
 \bottomrule
+\addlinespace[2pt]
+\multicolumn{4}{@{}l}{\footnotesize Stratified split ($\mathrm{seed}=42$) performed on
+unique source images, so no augmentation}\\
+\multicolumn{4}{@{}l}{\footnotesize or duplicate of a test image can appear in the training
+set.}\\
 \end{tabular}
 \end{table}
 
@@ -247,25 +253,28 @@ Test       & 308  & 15\% & YOLO \\
 \label{sec:crops}
 
 To enable fine-grained anomaly classification, we extracted anatomical crop images
-from the region proposals generated by the Stage-1 detector.
+using open-set region proposals rather than the single-class body detector.
 Two anatomical regions of clinical priority were targeted: ocular regions (eyes) and
-distal limbs (legs).
-Crops were extracted by applying fixed-ratio padding (20\%) around each bounding box
-at the class-2 (head region) annotations from the Roboflow sources.
-Ocular-anomaly labels were generated using zero-shot visual language model inference
+distal limbs (legs). Candidate regions were localised with Grounding
+DINO~\cite{liu2023grounding} open-set detection, which produced a five-class pseudo-label
+scheme (body, head, eye, front leg, rear leg); we retained the ocular
+(\texttt{alpaca\_eye}) and distal-limb (\texttt{alpaca\_leg}) proposals and cropped each
+with a fixed-ratio padding of 10\% around the predicted box.
+Ocular-anomaly labels were then generated using zero-shot vision-language inference
 (Groq \texttt{meta-llama/llama-4-scout-17b-16e-instruct}, a Groq-hosted multimodal
 (vision-language) model;\footnote{Model card:
-\url{https://console.groq.com/docs/model/meta-llama/llama-4-scout-17b-16e-instruct}.}
-open-set detection assisted by
-Grounding DINO~\cite{liu2023grounding}), \emph{without} veterinary expert validation ---
+\url{https://console.groq.com/docs/model/meta-llama/llama-4-scout-17b-16e-instruct}.})
+\emph{without} veterinary expert validation ---
 a design choice whose limitations are central to the feasibility study reported below.
 The same data-integrity audit that affected the detector revealed two further problems in
-the ocular crop set: (i)~only \textbf{91 unique anomalous eye images} actually existed; the
-873 ``anomaly'' crops originally counted were these 91 images multiplied by augmentation,
-with augmentations of the same image leaking across train/test; and (ii)~75 of 97 images
-labelled ``anomaly'' were the \emph{same file} as a ``normal'' image, i.e. direct
-label conflicts. After deduplication and conflict resolution, Table~\ref{tab:crops}
-reports the honest unique-image inventory.
+the ocular crop set: (i)~\emph{augmentation leakage} --- the 873 ``anomaly'' crops originally
+counted were augmentation copies of far fewer source images, with augmentations of the same
+image leaking across train/test; and (ii)~\emph{label conflicts} --- of the unique
+``anomaly''-labelled images, 75 were the \emph{same file} (identical MD5) as a ``normal''
+image, an artefact of an extraction step that copied rather than moved crops.
+After removing augmentation leakage and resolving these conflicts by MD5 matching, only
+\textbf{91 unique anomalous eye images} remained; Table~\ref{tab:crops} reports the honest
+unique-image inventory.
 For the classifier, the 462 usable eye crops (371 normal / 91 anomaly) were partitioned
 with the same 70\%/15\%/15\% train/validation/test scheme as the detector, using a
 group-aware split that keeps every augmentation of a source image on a single side and
@@ -279,17 +288,24 @@ constraint inherited from the low-resolution source images that bounds any downs
 ocular assessment.
 
 \begin{table}[h]
-\caption{Anatomical crop inventory for classifier training, after deduplication and
-         label-conflict resolution.}
+\caption{Anatomical crop inventory for the classifier feasibility study, after MD5
+         deduplication and label-conflict resolution. Counts are unique source images.}
 \label{tab:crops}
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{@{}lccclc@{}}
 \toprule
-\textbf{Region} & \textbf{Normal} & \textbf{Anomaly (unique)} & \textbf{Labelling method} \\
+\textbf{Region} & \textbf{Normal} & \textbf{Anomaly} & \textbf{Total} &
+\textbf{Labelling method} & \textbf{Usable} \\
 \midrule
-Eyes & 371 & 91 & Auto (Groq Vision, unvalidated) \\
-Legs & 443 & 3  & Auto (Groq Vision, unvalidated) \\
+Eyes & 371 & 91 & 462 & Auto (Groq Vision, unvalidated) & Yes \\
+Legs & 443 & 3  & 446 & Auto (Groq Vision, unvalidated) & No\textsuperscript{a} \\
 \bottomrule
+\addlinespace[2pt]
+\multicolumn{6}{@{}l}{\footnotesize \textsuperscript{a}Only 3 anomalous leg crops --- too
+few to train a classifier; leg anomaly detection is deferred to future work.}\\
+\multicolumn{6}{@{}l}{\footnotesize Extracted eye crops have a median smaller side of
+$\approx$31~px (Section~\ref{sec:discussion}), a physical resolution ceiling}\\
+\multicolumn{6}{@{}l}{\footnotesize inherited from low-resolution source imagery.}\\
 \end{tabular}
 \end{table}
 
@@ -313,7 +329,7 @@ The best checkpoint was exported to ONNX format for production deployment.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{fig6_transfer_learning.pdf}
+  \includegraphics[width=\textwidth]{fig6_transfer_learning.png}
   \caption{Two-stage transfer learning pipeline evaluated in the ocular anomaly
            classification feasibility study.
            Stage~1 adapts EfficientNet-B2 (ImageNet-initialised) to the eye disease
@@ -421,30 +437,34 @@ Figure~\ref{fig:detector} presents training curves and per-metric test performan
 \begin{table}[h]
 \caption{Stage-1 alpaca body detector on the leakage-free held-out test set
          ($n = 308$ images, 498 instances): the deployed compact YOLOv11n versus a
-         larger YOLOv11s capacity ablation. All metrics were reproduced from the
-         released checkpoints (\texttt{best\_clean.pt}, \texttt{best\_clean\_s.pt}).}
+         larger YOLOv11s capacity ablation. Precision and Recall are reported at the
+         default confidence threshold; best value per row in \textbf{bold}. All metrics
+         were reproduced from the released checkpoints (\texttt{best\_clean.pt},
+         \texttt{best\_clean\_s.pt}).}
 \label{tab:detector}
 \small
-\begin{tabular}{lcc}
+\begin{tabular}{@{}lcc@{}}
 \toprule
 \textbf{Metric} & \textbf{YOLOv11n (deployed)} & \textbf{YOLOv11s (ablation)} \\
 \midrule
-mAP@0.5        & \textbf{0.860} & 0.863 \\
-mAP@0.5:0.95   & 0.693 & 0.711 \\
-Precision      & 0.913 & 0.903 \\
-Recall         & 0.731 & 0.766 \\
-\midrule
-Parameters           & 2.58M & 9.43M \\
-GFLOPs               & 6.3   & 21.5 \\
-Model size (PyTorch) & 5.3 MB & 18.3 MB \\
-Model size (ONNX)    & 11.0 MB & --- \\
+\multicolumn{3}{@{}l}{\textit{Detection accuracy}} \\
+\quad mAP@0.5        & 0.860 & \textbf{0.863} \\
+\quad mAP@0.5:0.95   & 0.693 & \textbf{0.711} \\
+\quad Precision      & \textbf{0.913} & 0.903 \\
+\quad Recall         & 0.731 & \textbf{0.766} \\
+\addlinespace
+\multicolumn{3}{@{}l}{\textit{Model efficiency}} \\
+\quad Parameters           & \textbf{2.58M} & 9.43M \\
+\quad GFLOPs               & \textbf{6.3}   & 21.5 \\
+\quad Model size (PyTorch) & \textbf{5.3 MB} & 18.3 MB \\
+\quad Model size (ONNX)    & 11.0 MB & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{fig3_detector.pdf}
+  \includegraphics[width=\textwidth]{fig3_detector.png}
   \caption{YOLOv11n Stage-1 detector test-set performance on the leakage-free
            held-out set ($n = 308$ images): mAP@0.5 = 0.860, mAP@0.5:0.95 = 0.693,
            Precision = 0.913, and Recall = 0.731.}
@@ -454,8 +474,9 @@ Model size (ONNX)    & 11.0 MB & --- \\
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{fig8_yolo_detections.pdf}
-  \caption{YOLOv11n detection examples on held-out test images.
-           Top row: ground-truth bounding boxes. Bottom row: model predictions.
+  \caption{YOLOv11n detection examples on held-out test images, shown for two test
+           batches (rows). Left column: ground-truth bounding boxes; right column:
+           YOLOv11n predictions with confidence scores.
            The detector correctly localises individual alpacas under varied lighting,
            occlusion, and herd density conditions typical of Andean altiplano settings.}
   \label{fig:yolo_examples}
@@ -487,18 +508,19 @@ localisation.
 
 \begin{table}[h]
 \caption{EfficientNet-B2 ocular anomaly classifier --- leakage-free test-set performance
-         ($n=70$: 14 anomaly / 56 normal). Bootstrap CI: $B = 1000$, seed = 42.}
+         ($n=70$: 14 anomaly / 56 normal). Percentile bootstrap 95\% CI ($B = 1000$,
+         seed~=~42). An AUC-ROC CI straddling 0.5 indicates chance-level discrimination.}
 \label{tab:classifier}
 \small
-\begin{tabular}{lcc}
+\begin{tabular}{@{}lcc@{}}
 \toprule
 \textbf{Metric} & \textbf{Value} & \textbf{95\% CI} \\
 \midrule
 AUC-ROC          & \textbf{0.506} & {[}0.366, 0.645{]} \\
-F1 (anomaly)     & \textbf{0.065} & --- \\
+F1 (anomaly)     & 0.065 & --- \\
 Accuracy         & 0.586 & --- \\
 \midrule
-$n_\text{test}$ (anomaly / normal) & 70 (14 / 56) & --- \\
+$n_\text{test}$ (anomaly / normal) & \multicolumn{2}{c}{70 (14 / 56)} \\
 Interpretation & \multicolumn{2}{c}{Indistinguishable from chance} \\
 \bottomrule
 \end{tabular}
@@ -517,7 +539,7 @@ Figure~\ref{fig:pipeline} illustrates the system architecture.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{fig1_pipeline.pdf}
+  \includegraphics[width=\textwidth]{fig1_pipeline.png}
   \caption{AlpacaVision AI system pipeline. Input images are processed by the YOLOv11n
            body detector (Stage 1) followed by anatomical crop extraction. Because the
            in-house ocular classifier did not reach above-chance performance, ocular
@@ -535,9 +557,10 @@ Figure~\ref{fig:pipeline} illustrates the system architecture.
 \subsection{Detector Performance in Context}
 
 The YOLOv11n Stage-1 detector achieves mAP@0.5 = 0.860 using only 2.58M parameters,
-comparable to larger architectures reported for sheep detection
-(mAP@0.5 $\approx$ 0.88--0.95,~\cite{kong2022sheep}) and cattle monitoring
-systems~\cite{neethirajan2020}. Notably, a larger YOLOv11s model reached only
+approaching the range reported for larger architectures in related livestock tasks such as
+sheep detection (mAP@0.5 $\approx$ 0.88--0.95,~\cite{kong2022sheep}) and cattle monitoring
+systems~\cite{neethirajan2020}, despite the greater visual heterogeneity of our
+multi-source dataset. Notably, a larger YOLOv11s model reached only
 mAP@0.5 = 0.863 on the same leakage-free split, indicating that the compact model
 captures essentially all of the available signal at a fraction of the cost.
 The high precision (P = 0.913) relative to recall (R = 0.731) indicates conservative
@@ -753,112 +776,5 @@ language polishing; all scientific content was verified and approved by the auth
 
 \bibliography{references}
 
-\iffalse % hardcoded bibliography replaced by BibTeX above
-\begin{thebibliography}{99}
-
-\bibitem{inei2024}
-Instituto Nacional de Estadística e Informática (INEI).
-\textit{IV Censo Nacional Agropecuario -- Resultados definitivos}.
-Lima, Perú: INEI, 2024.
-
-\bibitem{senasa2023}
-Servicio Nacional de Sanidad Agraria (SENASA).
-\textit{Estadísticas del sistema de control pecuario, Puno}.
-Lima, Perú: SENASA, 2023.
-
-\bibitem{ramirez2020}
-Ram\'irez, J.; Condori, A. Avances en la mejora gen\'etica de alpacas en el altiplano peruano.
-\textit{Revista de Investigaciones Veterinarias del Per\'u} \textbf{2020}, \textit{31}(2), 123--135.
-
-\bibitem{ali2023}
-Ali, R.; Rafaq, M.S.; Hasan, M.J.; Asghar, F.; Bashir, A.K.; Dottorini, T.
-Application of deep learning for livestock behaviour recognition: A systematic literature review.
-\textit{Applied Sciences} \textbf{2023}, \textit{13}(20), 11253.
-
-\bibitem{giraldo2021}
-Giraldo, W.; L\'opez, J.; Salazar, A. Computer vision techniques for livestock monitoring.
-\textit{Computers and Electronics in Agriculture} \textbf{2021}, \textit{187}, 106250.
-
-\bibitem{xiao2025}
-Xiao, S.; Dhand, N.K.; Wang, Z.; Hu, K.; Thomson, P.C.; House, J.K.; Khatkar, M.S.
-Review of applications of deep learning in veterinary diagnostics and animal health.
-\textit{Frontiers in Veterinary Science} \textbf{2025}, \textit{12}, 1511522.
-
-\bibitem{smith2025cattle}
-Smith, J.; et al.
-Deep learning for cattle lameness detection from gait video.
-\textit{Nature Scientific Reports} \textbf{2025}, \textit{15}, 12345.
-
-\bibitem{kong2022sheep}
-Kong, H.; Wang, X.; Tao, L.
-Sheep detection in complex agricultural environments using YOLOv5.
-\textit{Computers and Electronics in Agriculture} \textbf{2022}, \textit{203}, 107478.
-
-\bibitem{mdpi2025canine}
-Dogan, M.; Yildirim, A.
-Automated canine cataract detection using deep learning and transfer learning.
-\textit{MDPI Animals} \textbf{2025}, \textit{15}(9), 1327.
-
-\bibitem{doganetal2024}
-Do\u{g}an, M.; et al.
-Computer-vision-based detection of ocular disease in large animals.
-\textit{Veterinary Ophthalmology} \textbf{2024}, \textit{27}(3), 210--220.
-
-\bibitem{jocher2023}
-Jocher, G.; Chaurasia, A.; Qiu, J.
-\textit{Ultralytics YOLO}; Ultralytics, 2023.
-\href{https://github.com/ultralytics/ultralytics}{https://github.com/ultralytics/ultralytics}
-
-\bibitem{ultralytics2024}
-Ultralytics.
-\textit{YOLOv11: Ultralytics Object Detection Model}; Ultralytics, 2024.
-\href{https://docs.ultralytics.com}{https://docs.ultralytics.com}
-
-\bibitem{tan2019}
-Tan, M.; Le, Q.V.
-EfficientNet: Rethinking model scaling for convolutional neural networks.
-In \textit{Proceedings of ICML}, 2019; pp.~6105--6114.
-
-\bibitem{lin2017focal}
-Lin, T.-Y.; Goyal, P.; Girshick, R.; He, K.; Dollar, P.
-Focal loss for dense object detection.
-In \textit{Proceedings of ICCV}, 2017; pp.~2980--2988.
-
-\bibitem{selvaraju2017}
-Selvaraju, R.R.; Cogswell, M.; Das, A.; Vedantam, R.; Parikh, D.; Batra, D.
-Grad-CAM: Visual explanations from deep networks via gradient-based localisation.
-In \textit{Proceedings of ICCV}, 2017; pp.~618--626.
-
-\bibitem{mcnemar1947}
-McNemar, Q. Note on the sampling error of the difference between correlated proportions
-or percentages. \textit{Psychometrika} \textbf{1947}, \textit{12}(2), 153--157.
-
-\bibitem{pizer1987}
-Pizer, S.M.; et al.
-Adaptive histogram equalization and its variations.
-\textit{Computer Vision, Graphics, and Image Processing} \textbf{1987}, \textit{39}(3), 355--368.
-
-\bibitem{liu2023grounding}
-Liu, S.; Zeng, Z.; Ren, T.; Li, F.; Zhang, H.; Yang, J.; Li, C.; Yang, J.; Su, H.; Zhu, J.; et al.
-Grounding DINO: Marrying DINO with grounded pre-training for open-set object detection.
-\textit{arXiv} \textbf{2023}, arXiv:2303.05499.
-
-\bibitem{groq2024}
-Groq Inc.
-\textit{Groq API: llama-3.3-70b-versatile}.
-\href{https://console.groq.com}{https://console.groq.com}, 2024.
-
-\bibitem{he2016}
-He, K.; Zhang, X.; Ren, S.; Sun, J.
-Deep residual learning for image recognition.
-In \textit{Proceedings of CVPR}, 2016; pp.~770--778.
-
-\bibitem{kingma2015}
-Kingma, D.P.; Ba, J.
-Adam: A method for stochastic optimization.
-In \textit{Proceedings of ICLR}, 2015.
-
-\end{thebibliography}
-\fi % end of commented-out hardcoded bibliography
 
 \end{document}

@@ -7,7 +7,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.6%20%2B%20CUDA-ee4c2c.svg)](https://pytorch.org/)
 [![YOLOv11](https://img.shields.io/badge/detector-YOLOv11-00a3e0.svg)](https://docs.ultralytics.com)
 [![Journal](https://img.shields.io/badge/target-Animals%20(MDPI)-1a7f8e.svg)](https://www.mdpi.com/journal/animals)
-[![Status](https://img.shields.io/badge/status-in%20preparation-orange.svg)](#citation)
+[![Status](https://img.shields.io/badge/status-under%20review-blue.svg)](#citation)
 
 A reproducible computer-vision system for alpacas (*Vicugna pacos*) of the **Peruvian
 Altiplano**: a **curated, deduplicated, leakage-free detection dataset**, a **compact
@@ -17,7 +17,7 @@ an **honest feasibility study** of automatic ocular anomaly classification.
 > **Companion code for the manuscript:**
 > *Automatic Computer-Vision Detection of Morphological Anomalies in Altiplano Alpacas:
 > A Curated Dataset, Compact Detector, and Ocular Classification Feasibility Study.*
-> In preparation for *Animals* (MDPI), Q1 Veterinary Sciences.
+> Submitted to *Animals* (MDPI), Q1 Veterinary Sciences — currently under peer review.
 
 ---
 
@@ -252,7 +252,7 @@ If you use this dataset or code, please cite (details to be updated on acceptanc
              Ccopa-Acero, Cristian Daniel and Alem\'an-Gonzales, Leonid},
   journal = {Animals (MDPI)},
   year    = {2026},
-  note    = {In preparation}
+  note    = {Manuscript under review}
 }
 ```
 
