@@ -1,6 +1,6 @@
 # Automatic Computer-Vision Detection of Morphological Anomalies in Altiplano Alpacas
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21134001.svg)](https://doi.org/10.5281/zenodo.21134001)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21134001-blue.svg)](https://doi.org/10.5281/zenodo.21134001)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset: CC BY 4.0](https://img.shields.io/badge/dataset-CC%20BY%204.0-blue.svg)](#data)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
@@ -18,6 +18,10 @@ an **honest feasibility study** of automatic ocular anomaly classification.
 > *Automatic Computer-Vision Detection of Morphological Anomalies in Altiplano Alpacas:
 > A Curated Dataset, Compact Detector, and Ocular Classification Feasibility Study.*
 > Submitted to *Animals* (MDPI), Q1 Veterinary Sciences — currently under peer review.
+
+<p align="center">
+  <img src="paper/figures/fig1_pipeline.png" alt="AlpacaVision AI deployment pipeline" width="92%">
+</p>
 
 ---
 
@@ -70,6 +74,15 @@ instances), reproduced from the released checkpoints.
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **YOLOv11n** (deployed) | **0.860** | 0.693 | 0.913 | 0.731 | 2.58M | 5.3 MB |
 | YOLOv11s (ablation) | 0.863 | 0.711 | 0.903 | 0.766 | 9.43M | 18.3 MB |
+
+<p align="center">
+  <img src="paper/figures/fig3_detector.png" alt="YOLOv11n detector metrics on the leakage-free test set" width="72%">
+</p>
+
+<p align="center">
+  <img src="paper/figures/fig8_yolo_detections.png" alt="YOLOv11n detection examples: ground truth vs predictions" width="92%">
+  <br><em>Ground-truth boxes (left) vs. YOLOv11n predictions (right) on held-out test images.</em>
+</p>
 
 Ocular anomaly classifier — **feasibility study / honest negative result** (leakage-free
 test, *n* = 70: 14 anomaly / 56 normal):
@@ -176,6 +189,10 @@ data/          (git-ignored; deposited to Zenodo) annotated_clean/ = curated dat
 
 The curated dataset (**2,051 unique images**, YOLO format, train/val/test = 1,435 / 308 /
 308) is released under **CC BY 4.0** and deposited on Zenodo.
+
+<p align="center">
+  <img src="paper/figures/fig11_dataset_stats.png" alt="Dataset composition and leakage-free splits" width="92%">
+</p>
 
 - **Zenodo DOI:** [10.5281/zenodo.21134001](https://doi.org/10.5281/zenodo.21134001) (see `docs/DATASET_CARD.md` for full provenance,
   preprocessing, and licensing).
